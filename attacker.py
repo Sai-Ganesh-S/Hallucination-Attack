@@ -13,7 +13,7 @@ class Attacker:
             self.model_config = getattr(ModelConfig, model_name)[0]
         except AttributeError:
             raise NotImplementedError
-
+        
         self.model_name = model_name
         self.init_input = init_input
         self.target = target
@@ -261,6 +261,7 @@ class Attacker:
 
 
     def run(self):
+        flag = 0
         self.pre()
         early_stop = self.kwargs.get('early_stop', False)
         while self.temp_step <= self.steps:
@@ -273,12 +274,13 @@ class Attacker:
             self.temp_step += 1
             if early_stop and self.temp_output == self.target:
                 with open('/content/Hallucination-Attack/res.txt', "a") as file:
-                    file.write(self.temp_input +" "+self.temp.output)
-                    
+                    file.write(self.temp_input +" |div| "+self.temp_output)
+                flag = 1
                 break
         is_save = self.kwargs.get('is_save', False)
         
         if is_save:
             self.save()
-        with open('/content/Hallucination-Attack/res.txt', "a") as file:
-            file.write(self.temp_input +" "+self.temp.output)
+        if flag == 0:
+            with open('/content/Hallucination-Attack/res.txt', "a") as file:
+                file.write(self.temp_input +" |div| "+self.temp_output)
