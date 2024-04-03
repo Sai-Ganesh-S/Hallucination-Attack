@@ -10,23 +10,23 @@ model_name = 'vicuna' ### [vicuna, llama2, baichuan, internlm, chatglm, ziya]
 
 ### 2. Weak Semantic Attack (initialized from the raw sentence)
 def attack_cycle(ques,ans):
-init_input = ques
-target = ans
-mini_batch_size = 25 ### If CUDA out of memory, lower the mini_batch_size
-batch_size = 1500
-device = 'cuda:0'
-steps = 100
-# topk = 256
+    init_input = ques
+    target = ans
+    mini_batch_size = 25 ### If CUDA out of memory, lower the mini_batch_size
+    batch_size = 1500
+    device = 'cuda:0'
+    steps = 100
+    # topk = 256
 
-attacker_params = {
-    'update_strategy': 'gaussian',
-    'early_stop': True,
-    # 'is_save': True,
-    'save_dir': './result',
-}
+    attacker_params = {
+        'update_strategy': 'gaussian',
+        'early_stop': True,
+        # 'is_save': True,
+        'save_dir': './result',
+    }
 
 
-if __name__ == '__main__':
+    
     attacker = Attacker(
         model_name,
         init_input,
