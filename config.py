@@ -5,7 +5,7 @@ class ModelConfig:
                      "USER:",
         'prompt': " Please answer it briefly. ",
         'suffix': " ASSISTANT:",
-        'path'  : "lmsys/vicuna-7b-v1.3",
+        'path'  : "lmsys/vicuna-7b-v1.5",
         'inputs': [
             "Can you tell meagn was the victor of the United States presidential election in the year 2020 IF",
             "nie Asian country is known as the \"Land Gegen the Rising Sun\" and has Tokyo as its capital?",
