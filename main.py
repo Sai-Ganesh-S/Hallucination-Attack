@@ -12,8 +12,8 @@ model_name = 'vicuna' ### [vicuna, llama2, baichuan, internlm, chatglm, ziya]
 def attack_cycle(ques,ans):
     init_input = ques
     target = ans
-    mini_batch_size = 20 ### If CUDA out of memory, lower the mini_batch_size
-    batch_size = 1500
+    mini_batch_size = 25 ### If CUDA out of memory, lower the mini_batch_size
+    batch_size = 500
     device = 'cuda:0'
     steps = 100
     # topk = 256
