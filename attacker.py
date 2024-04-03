@@ -274,7 +274,7 @@ class Attacker:
             self.temp_step += 1
             if early_stop and self.temp_output == self.target:
                 with open('/content/Hallucination-Attack/res.txt', "a") as file:
-                    file.write(self.temp_input +" |div| "+self.temp_output)
+                    file.write(self.temp_input +" |div| "+self.temp_output+ "\n")
                 flag = 1
                 break
         is_save = self.kwargs.get('is_save', False)
@@ -283,4 +283,4 @@ class Attacker:
             self.save()
         if flag == 0:
             with open('/content/Hallucination-Attack/res.txt', "a") as file:
-                file.write(self.temp_input +" |div| "+self.temp_output)
+                file.write(self.temp_input +" |div| "+self.temp_output + "\n")
