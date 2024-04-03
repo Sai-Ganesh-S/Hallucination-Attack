@@ -1,27 +1,28 @@
 from attacker import Attacker
 from utils import random_init
+import pandas as pd
 
 
 model_name = 'vicuna' ### [vicuna, llama2, baichuan, internlm, chatglm, ziya]
 
 ### 1. OoD Attack (initialized from random tokens)
-init_input = random_init(model_name, length=20)
+#init_input = random_init(model_name, length=20)
 
 ### 2. Weak Semantic Attack (initialized from the raw sentence)
-# init_input = 'Who was the victor of the United States presidential election in the year 2020?'
-
-target = 'Donald Trump was the victor of the United States presidential election in the year 2020.'
-mini_batch_size = 32 ### If CUDA out of memory, lower the mini_batch_size
-batch_size = 2048
+def attack_cycle(ques,ans):
+init_input = ques
+target = ans
+mini_batch_size = 25 ### If CUDA out of memory, lower the mini_batch_size
+batch_size = 1500
 device = 'cuda:0'
-# steps = 768
+steps = 100
 # topk = 256
 
 attacker_params = {
     'update_strategy': 'gaussian',
     'early_stop': True,
     # 'is_save': True,
-    # 'save_dir': './result',
+    'save_dir': './result',
 }
 
 
@@ -36,3 +37,10 @@ if __name__ == '__main__':
         **attacker_params
     )
     attacker.run()
+
+ds = pd.read_csv("/content/Hallucination-Attack/QA.csv")
+qs = ds ['qs']
+ans = ds['ans']
+print(qs, ans)
+for x in range(len(qs)):
+    attack_cycle(qs[x],ans[x])
