@@ -41,6 +41,7 @@ def attack_cycle(ques,ans):
 ds = pd.read_csv("/content/Hallucination-Attack/QA.csv")
 qs = ds ['qs']
 ans = ds['ans']
-print(qs, ans)
+
 for x in range(len(qs)):
+    print(qs[x], ans[x])
     attack_cycle(qs[x],ans[x])
